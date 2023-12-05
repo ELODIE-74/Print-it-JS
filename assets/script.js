@@ -18,27 +18,25 @@ const slides = [
   },
 ];
 
-//let baliseBannerArrow = document.querySelectorAll(".arrow");
-//console.log(baliseBannerArrow);
-//for (let i = 0; i < baliseBannerArrow.length; i++) {
-//console.log(baliseBannerArrow[i]);
-//}
-
-//function showMsg() {
-//console.log("Bonjour");
-//}
-//baliseBannerArrow.addEventListener("click", showMsg);
+let baliseBannerArrows = document.querySelectorAll(".arrow");
+for (let i = 0; i < baliseBannerArrows.length; i++) {
+  let arrow = baliseBannerArrows[i];
+  arrow.addEventListener("click", function () {
+    console.log("Flèche cliquée");
+  });
+}
+baliseBannerArrows.addEventListener("click", showMsg);
 //On sélectionne le premier button et le premier div du document
-//let arrowleft = document.querySelector(".arrow_left");
-//let div = document.querySelector(".arrow");
+let arrowleft = document.querySelector(".arrow_left");
+let div = document.querySelector(".arrow");
 
 //On utilise les propriétés gestionnaires d'évènement avec nos éléments
-//fg.onclick = function () {
-//alert("Flèche gauche cliqué");
-//};
-//ImageBitmap.onmouseover = function () {
-//this.style.backgroundColor = "orange";
-//};
-//div.onmouseout = function () {
-// this.style.backgroundColor = "white";
-//};
+arrowleft.onclick = function () {
+  alert("Flèche gauche cliqué");
+};
+imgArrow.onmouseover = function () {
+  this.style.backgroundColor = "orange";
+};
+div.onmouseout = function () {
+  this.style.backgroundColor = "white";
+};
