@@ -25,18 +25,27 @@ for (let i = 0; i < baliseBannerArrows.length; i++) {
     console.log("Flèche cliquée");
   });
 }
-baliseBannerArrows.addEventListener("click", showMsg);
-//On sélectionne le premier button et le premier div du document
-let arrowleft = document.querySelector(".arrow_left");
-let div = document.querySelector(".arrow");
+// Sélectionnez l'élément de la flèche gauche
+let arrowLeft = document.querySelector(".arrow_left");
+// Ajout d'un gestionnaire d'événements pour le clic sur la flèche gauche
+arrowLeft.addEventListener("click", function () {
+  console.log("Flèche gauche cliquée");
+});
+// Sélectionnez l'élément de la flèche droite
+let arrowRight = document.querySelector(".arrow_right");
+// Ajout d'un gestionnaire d'événements pour le clic sur la flèche droite
+arrowRight.addEventListener("click", function () {
+  console.log("Flèche droite cliquée");
+});
 
+//baliseBannerArrows.addEventListener("click", ".arrow");
+//On sélectionne le premier button et le premier div du document
+//let arrow = document.querySelector(".arrow");
+//let div = document.querySelector(".arrow");
 //On utilise les propriétés gestionnaires d'évènement avec nos éléments
-arrowleft.onclick = function () {
-  alert("Flèche gauche cliqué");
-};
-imgArrow.onmouseover = function () {
-  this.style.backgroundColor = "orange";
-};
-div.onmouseout = function () {
-  this.style.backgroundColor = "white";
-};
+//arrowleft.onclick = function () {
+//alert("Flèche gauche cliqué");
+//};
+//arrowright.onclick = function () {
+//alert("Flèche droite cliqué");
+//};
