@@ -18,5 +18,27 @@ const slides = [
   },
 ];
 
-let baliseBannerArrow = document.querySelectorAll(".arrow");
-console.log(baliseBannerArrow);
+//let baliseBannerArrow = document.querySelectorAll(".arrow");
+//console.log(baliseBannerArrow);
+//for (let i = 0; i < baliseBannerArrow.length; i++) {
+//console.log(baliseBannerArrow[i]);
+//}
+
+//function showMsg() {
+//console.log("Bonjour");
+//}
+//baliseBannerArrow.addEventListener("click", showMsg);
+//On sélectionne le premier button et le premier div du document
+//let arrowleft = document.querySelector(".arrow_left");
+//let div = document.querySelector(".arrow");
+
+//On utilise les propriétés gestionnaires d'évènement avec nos éléments
+//fg.onclick = function () {
+//alert("Flèche gauche cliqué");
+//};
+//ImageBitmap.onmouseover = function () {
+//this.style.backgroundColor = "orange";
+//};
+//div.onmouseout = function () {
+// this.style.backgroundColor = "white";
+//};
