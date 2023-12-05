@@ -38,6 +38,22 @@ arrowRight.addEventListener("click", function () {
   console.log("Flèche droite cliquée");
 });
 
+//Sélection de tous les points
+let dots = document.querySelectorAll(".dot");
+// Ajout d'un gestionnaire d'événements à chaque point
+dots.forEach(function (dot) {
+  dot.addEventListener("click", function () {
+    // index de l'image à afficher à partir de l'attribut "data-image"
+    let imageIndex = parseInt(dot.getAttribute("data-image"));
+    // mise à jour du carrousel
+    // Mettez à jour le point actif en ajoutant une classe active
+    dots.forEach(function (bullet) {
+      bullet.classList.remove("active"); // Utilisez "bullet" au lieu de "dot"
+    });
+    dot.classList.add("active");
+  });
+});
+
 //baliseBannerArrows.addEventListener("click", ".arrow");
 //On sélectionne le premier button et le premier div du document
 //let arrow = document.querySelector(".arrow");
