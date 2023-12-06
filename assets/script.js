@@ -18,6 +18,8 @@ const slides = [
   },
 ];
 
+const bannerImg = document.querySelector(".banner-img");
+
 let baliseBannerArrows = document.querySelectorAll(".arrow");
 for (let i = 0; i < baliseBannerArrows.length; i++) {
   let arrow = baliseBannerArrows[i];
@@ -40,28 +42,73 @@ arrowRight.addEventListener("click", function () {
 
 //Sélection de tous les points
 let dots = document.querySelectorAll(".dot");
-// Ajout d'un gestionnaire d'événements à chaque point
-dots.forEach(function (dot) {
-  dot.addEventListener("click", function () {
-    // index de l'image à afficher à partir de l'attribut "data-image"
-    let imageIndex = parseInt(dot.getAttribute("data-image"));
-    // mise à jour du carrousel
-    // Mettez à jour le point actif en ajoutant une classe active
-    dots.forEach(function (bullet) {
-      bullet.classList.remove("active"); // Utilisez "bullet" au lieu de "dot"
-    });
-    dot.classList.add("active");
-  });
-});
+//let dots = ["0", "1", "2", "3"];
 
-//baliseBannerArrows.addEventListener("click", ".arrow");
-//On sélectionne le premier button et le premier div du document
-//let arrow = document.querySelector(".arrow");
-//let div = document.querySelector(".arrow");
-//On utilise les propriétés gestionnaires d'évènement avec nos éléments
-//arrowleft.onclick = function () {
-//alert("Flèche gauche cliqué");
-//};
-//arrowright.onclick = function () {
-//alert("Flèche droite cliqué");
-//};
+const slide = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
+let numero = 0;
+
+function ChangeSlide(sens) {
+  numero = numero + sens;
+  if (numero < 0) numero = slide.length - 1;
+  if (numero > slide.length - 1) numero = 0;
+  document.querySelectorAll("slides").src = slide[numero];
+}
+setInterval("ChangeSlide(1)", 4000);
+function texte() {
+  document.getElementById("tagline").innerHTML = "";
+}
+
+// Ajout d'un gestionnaire d'événements à chaque point
+//dots.forEach(function (dot) {
+// dot.addEventListener("click", function () {
+//dots.forEach(function (dot) {
+//dot.classList.remove("active");
+//});
+//dot.classList.add("active");
+//});
+//});
+//let baliseImage = document.getElementById("slide1.jpg");
+//baliseImage.setAttribute("alt", "Ceci est la nouvelle valeur de alt");
+//let slideshow = 1;
+//showSlides(slideshow);
+
+//function plusSlides(n) {
+//showSlides((slideshow += n));
+//}
+
+/*function currentSlide(n) {
+  showSlides((slideshow = n));
+}
+function showSlides(n) {
+  let slides = document.getElementsByClassName("slides");
+  let dots = document.getElementsByClassName("dot");
+
+  if (n > slides.length) {
+    slideshow = 1;
+  }
+
+  if (n < 1) {
+    slideshow = slides.length;
+  }
+
+  // Cacher toutes les slides
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  // Retirer "active" de tous les points
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].classList.remove("active");
+  }
+
+  // Afficher la slide demandée
+  slides[slideshow - 1].style.display = "block";
+
+  // Ajouter "active" sur le point cliqué
+  dots[slideshow - 1].classList.add("active");
+}
+
+//var imagejavascript = document.createElement("img");
+//imagejavascript.src = "assets/images/slideshow/slide1.jpg";
+//document.body.appendChild(imagejavascript);
+//const image = new Image("slide1.jpg");*/
