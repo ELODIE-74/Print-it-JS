@@ -40,44 +40,16 @@ arrowRight.addEventListener("click", function () {
 });
 
 //Affichage des points et activation et écoute des points
-let dots = document.querySelectorAll(".dot");
+let dots = document.querySelector(".dots");
 let index = 0;
-dots.forEach(function (dot) {
-  dot.addEventListener("click", function () {
-    dot.classList.add("active");
-  });
-  slides[i](index + 1);
-});
+for (let i = 0; i < slides.length; i++) {
+  let dot = document.createElement("div");
+  dot.classList.add("dot");
+  dots.append(dot);
+  if (i === 0) {
+    dot.classList.add("dot_selected");
+  }
+}
 
 //changement de slide
 const slidesArray = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
-
-function plusSlides(n) {
-  showSlides(index + n);
-}
-function currentSlide(n) {
-  showSlides((index = n));
-  document.getElementById("prev").addEventListener("click", function () {
-    plusSlides(slides >= -1);
-  });
-  document.getElementById("next").addEventListener("click", function () {
-    plusSlides(slides <= +1);
-  });
-  function showSlides(n) {
-    var slidesArray = document.getElementsByClassName("slides");
-    if (n > slidesArray.length) {
-      index = 1;
-    }
-    if (n < 1) {
-      index = slidesArray.length;
-    }
-    for (var i = 0; i < slidesArray.length; i++) {
-      slidesArray[i].style.display = "none";
-    }
-    slidesArray[index - 1].style.display = "block";
-  }
-
-  setTimeout(() => {
-    showSlides(n + 1);
-  }, 4000);
-}
