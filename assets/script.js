@@ -18,8 +18,9 @@ const slides = [
   },
 ];
 
-const bannerImg = document.querySelector(".banner-img");
+const bannerImage = document.getElementById("banner-img");
 
+//Clique des flèches
 let baliseBannerArrows = document.querySelectorAll(".arrow");
 for (let i = 0; i < baliseBannerArrows.length; i++) {
   let arrow = baliseBannerArrows[i];
@@ -27,88 +28,56 @@ for (let i = 0; i < baliseBannerArrows.length; i++) {
     console.log("Flèche cliquée");
   });
 }
-// Sélectionnez l'élément de la flèche gauche
 let arrowLeft = document.querySelector(".arrow_left");
-// Ajout d'un gestionnaire d'événements pour le clic sur la flèche gauche
 arrowLeft.addEventListener("click", function () {
+  // clique gauche écoute
   console.log("Flèche gauche cliquée");
 });
-// Sélectionnez l'élément de la flèche droite
 let arrowRight = document.querySelector(".arrow_right");
-// Ajout d'un gestionnaire d'événements pour le clic sur la flèche droite
 arrowRight.addEventListener("click", function () {
+  // clique droite écoute
   console.log("Flèche droite cliquée");
 });
 
-//Sélection de tous les points
+//Affichage des points et activation et écoute des points
 let dots = document.querySelectorAll(".dot");
-//let dots = ["0", "1", "2", "3"];
+let index = 0;
+dots.forEach(function (dot) {
+  dot.addEventListener("click", function () {
+    dot.classList.add("active");
+  });
+  slides[i](index + 1);
+});
 
-const slide = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
-let numero = 0;
+//changement de slide
+const slidesArray = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
 
-function ChangeSlide(sens) {
-  numero = numero + sens;
-  if (numero < 0) numero = slide.length - 1;
-  if (numero > slide.length - 1) numero = 0;
-  document.querySelectorAll("slides").src = slide[numero];
+function plusSlides(n) {
+  showSlides(index + n);
 }
-setInterval("ChangeSlide(1)", 4000);
-function texte() {
-  document.getElementById("tagline").innerHTML = "";
-}
-
-// Ajout d'un gestionnaire d'événements à chaque point
-//dots.forEach(function (dot) {
-// dot.addEventListener("click", function () {
-//dots.forEach(function (dot) {
-//dot.classList.remove("active");
-//});
-//dot.classList.add("active");
-//});
-//});
-//let baliseImage = document.getElementById("slide1.jpg");
-//baliseImage.setAttribute("alt", "Ceci est la nouvelle valeur de alt");
-//let slideshow = 1;
-//showSlides(slideshow);
-
-//function plusSlides(n) {
-//showSlides((slideshow += n));
-//}
-
-/*function currentSlide(n) {
-  showSlides((slideshow = n));
-}
-function showSlides(n) {
-  let slides = document.getElementsByClassName("slides");
-  let dots = document.getElementsByClassName("dot");
-
-  if (n > slides.length) {
-    slideshow = 1;
+function currentSlide(n) {
+  showSlides((index = n));
+  document.getElementById("prev").addEventListener("click", function () {
+    plusSlides(slides >= -1);
+  });
+  document.getElementById("next").addEventListener("click", function () {
+    plusSlides(slides <= +1);
+  });
+  function showSlides(n) {
+    var slidesArray = document.getElementsByClassName("slides");
+    if (n > slidesArray.length) {
+      index = 1;
+    }
+    if (n < 1) {
+      index = slidesArray.length;
+    }
+    for (var i = 0; i < slidesArray.length; i++) {
+      slidesArray[i].style.display = "none";
+    }
+    slidesArray[index - 1].style.display = "block";
   }
 
-  if (n < 1) {
-    slideshow = slides.length;
-  }
-
-  // Cacher toutes les slides
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  // Retirer "active" de tous les points
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].classList.remove("active");
-  }
-
-  // Afficher la slide demandée
-  slides[slideshow - 1].style.display = "block";
-
-  // Ajouter "active" sur le point cliqué
-  dots[slideshow - 1].classList.add("active");
+  setTimeout(() => {
+    showSlides(n + 1);
+  }, 4000);
 }
-
-//var imagejavascript = document.createElement("img");
-//imagejavascript.src = "assets/images/slideshow/slide1.jpg";
-//document.body.appendChild(imagejavascript);
-//const image = new Image("slide1.jpg");*/
