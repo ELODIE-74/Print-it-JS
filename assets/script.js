@@ -18,38 +18,70 @@ const slides = [
   },
 ];
 
+let Index = 0;
+let direction = "";
 const bannerImage = document.getElementById("banner-img");
+// mettre à jour le texte
+const tagLine = slides[Index].tagLine;
+document.querySelector("p").innerHTML = tagLine;
+console.log(`Clic sur la flèche ${direction}`);
 
 //Clique des flèches
 let baliseBannerArrows = document.querySelectorAll(".arrow");
 for (let i = 0; i < baliseBannerArrows.length; i++) {
-  let arrow = baliseBannerArrows[i];
-  arrow.addEventListener("click", function () {
-    console.log("Flèche cliquée");
+  let arrowLeft = document.querySelector(".arrow_left");
+  arrowLeft.addEventListener("click", function () {
+    // Clique gauche écoute
+    direction = "gauche";
+    miseajourDot(Index);
+    console.log(`Clic sur la flèche ${direction}`);
+  });
+  let arrowRight = document.querySelector(".arrow_right");
+  arrowRight.addEventListener("click", function () {
+    // Clique droite écoute
+    direction = "droite";
+    miseajourDot(Index);
+    console.log(`Clic sur la flèche ${direction}`);
   });
 }
-let arrowLeft = document.querySelector(".arrow_left");
-arrowLeft.addEventListener("click", function () {
-  // clique gauche écoute
-  console.log("Flèche gauche cliquée");
-});
-let arrowRight = document.querySelector(".arrow_right");
-arrowRight.addEventListener("click", function () {
-  // clique droite écoute
-  console.log("Flèche droite cliquée");
-});
 
-//Affichage des points et activation et écoute des points
+// Affichage des points et activation et écoute des points
 let dots = document.querySelector(".dots");
-let index = 0;
-for (let i = 0; i < slides.length; i++) {
-  let dot = document.createElement("div");
-  dot.classList.add("dot");
-  dots.append(dot);
-  if (i === 0) {
-    dot.classList.add("dot_selected");
+function miseajourDot(Index) {
+  // Supprimer tous les points existants
+  while (dots.firstChild) {
+    dots.removeChild(dots.firstChild);
+  }
+  for (let i = 0; i < slides.length; i++) {
+    let dot = document.createElement("div");
+    dot.classList.add("dot");
+    dots.append(dot);
+    if (i === Index) {
+      dot.classList.add("dot_selected");
+    } else {
+      dot.classList.remove("dot_selected");
+    }
+    // Ajouter un gestionnaire d'événement clic pour chaque point
+    dot.addEventListener("click", function () {
+      miseajourDot(i); // Mettre à jour l'index en fonction du point cliqué
+    });
   }
 }
 
 //changement de slide
 const slidesArray = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
+/*function miseajourSlide(index, sensclick) {
+  if (Index === -1 && sensclick === "left") {
+    Index = slides.length - 1;
+  } else if (Index === slides.length && sensclick === "right") {
+    Index = 0;
+  }
+}
+//mise a jour de l'image au moment du cliquage
+const imageSlide = "assets/images/slideshow/" + slides[Index].image;
+bannerImage.src = imageSlide;
+bannerImage.alt = "Slide" + (Index + 1);
+
+// affichage de la diapo de début
+miseajourSlide(Index, "commencement");*/
+miseajourDot(Index);
