@@ -54,10 +54,6 @@ function changeDots(index) {
     } else {
       dot.classList.remove("dot_selected");
     }
-    //ajout d'écoute pour chaque point
-    dot.addEventListener("click", function () {
-      changeDots(i); //mise à jour de l'index en fonction du déplacement du point cliqué
-    });
   }
 }
 
