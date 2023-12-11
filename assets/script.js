@@ -20,11 +20,19 @@ const slides = [
 
 let Index = 0;
 let direction = "";
-const bannerImage = document.getElementById("banner-img");
+
+const bannerImage = document.getElementById(".banner-img");
 // mettre à jour le texte
 const tagLine = slides[Index].tagLine;
-document.querySelector("p").innerHTML = tagLine;
+document.querySelector("#banner p").innerHTML = tagLine;
 console.log(`Clic sur la flèche ${direction}`);
+
+//mettre à jour l'images
+const changeImage = `assets/images/slideshow/${slides[Index].image}`;
+bannerImage.src = changeImage;
+bannerImage.alt = slides[Index].image;
+
+console.log("slides");
 
 //Clique des flèches
 let baliseBannerArrows = document.querySelectorAll(".arrow");
@@ -34,6 +42,7 @@ for (let i = 0; i < baliseBannerArrows.length; i++) {
     // Clique gauche écoute
     direction = "gauche";
     miseajourDot(Index);
+    ChangeSlide("gauche");
     console.log(`Clic sur la flèche ${direction}`);
   });
   let arrowRight = document.querySelector(".arrow_right");
@@ -41,6 +50,7 @@ for (let i = 0; i < baliseBannerArrows.length; i++) {
     // Clique droite écoute
     direction = "droite";
     miseajourDot(Index);
+    ChangeSlide("droite");
     console.log(`Clic sur la flèche ${direction}`);
   });
 }
@@ -68,20 +78,22 @@ function miseajourDot(Index) {
   }
 }
 
-//changement de slide
-const slidesArray = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
-/*function miseajourSlide(index, sensclick) {
-  if (Index === -1 && sensclick === "left") {
-    Index = slides.length - 1;
-  } else if (Index === slides.length && sensclick === "right") {
-    Index = 0;
+//chargement et changement de slide
+let slidesArray = ["slide1.jpg", "slide2.jpg", "slide3.jpg", "slide4.jpg"];
+
+function ChangeSlide(direction) {
+  if (direction === "gauche") {
+    Index -= 1;
+    if (Index < 0) {
+      Index = slides.length - 1;
+    }
+  } else if (direction === "droite") {
+    Index += 1;
+    if (Index >= slides.length) {
+      Index = 0;
+    }
   }
 }
-//mise a jour de l'image au moment du cliquage
-const imageSlide = "assets/images/slideshow/" + slides[Index].image;
-bannerImage.src = imageSlide;
-bannerImage.alt = "Slide" + (Index + 1);
-
 // affichage de la diapo de début
-miseajourSlide(Index, "commencement");*/
+ChangeSlide("commencement");
 miseajourDot(Index);
