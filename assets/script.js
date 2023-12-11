@@ -21,56 +21,58 @@ const slides = [
 const bannerImg = document.querySelector(".banner-img");
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
-const dots = document.querySelectorAll(".dot"); // Sélectionnez tous les points
+const dots = document.querySelectorAll(".dot");
 
 let positionIndex = 0;
 
-// Fonction pour mettre à jour les points indicateurs
+// fonction qui permet de mettre à jour les points
 function changeDots(index) {
   dots.forEach((dot, i) => {
     if (i === index) {
-      dot.classList.add("dot_selected"); // Ajoutez la classe pour le point actuel
+      dot.classList.add("dot_selected");
+      // permet de colorer le premier point
     } else {
-      dot.classList.remove("dot_selected"); // Supprimez la classe pour les autres points
+      dot.classList.remove("dot_selected");
+      // enelève la class css pour les autres points
     }
   });
 }
 
-// Fonction pour mettre à jour les points indicateurs, l'image et le texte
+// fonction changement générale
 function changeImages(index, sensImage) {
-  //correction du bug pour la première et la dernière image
+  //correction problème affichage
   if (positionIndex === -1 && sensImage === "left") {
     positionIndex = slides.length - 1;
   } else if (positionIndex === slides.length && sensImage === "right") {
     positionIndex = 0;
   }
 
-  // Mettre à jour l'image
+  // mise à jour de l'image
   const imagePath = `assets/images/slideshow/${slides[positionIndex].image}`;
   bannerImg.src = imagePath;
   bannerImg.alt = `Slide ${positionIndex + 1}`;
 
-  // Mettre à jour le texte
+  // mise à jour du texte
   const tagLine = slides[positionIndex].tagLine;
   document.querySelector("p").innerHTML = tagLine;
 
   console.log(`Clic sur la flèche ${sensImage}`);
 }
 
-// Gestionnaire d'événement pour le clic sur la flèche gauche
+// écoute de l'évènement de la flèche gauche avec addEventListener
 arrowLeft.addEventListener("click", function () {
   positionIndex = positionIndex - 1;
   changeImages(positionIndex, "left");
   changeDots(positionIndex); // Mettez à jour les points indicateurs
 });
 
-// Gestionnaire d'événement pour le clic sur la flèche droite
+// écoute de l'évènement de la flèche droite avec addEventListener
 arrowRight.addEventListener("click", function () {
   positionIndex = positionIndex + 1;
   changeImages(positionIndex, "right");
-  changeDots(positionIndex); // Mettez à jour les points indicateurs
+  changeDots(positionIndex); // mise à jour des points dans le carrousel
 });
 
-// Afficher la première diapositive au chargement de la page
+// affichage de la première diapo
 changeImages(positionIndex, "démarrage");
-changeDots(positionIndex); // Mettez à jour les points indicateurs pour la première diapositive
+changeDots(positionIndex); // mise à jour des points pour la première diapo
