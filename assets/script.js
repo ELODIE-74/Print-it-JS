@@ -21,7 +21,7 @@ const slides = [
 const bannerImg = document.querySelector(".banner-img");
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
-const dots = document.querySelectorAll(".dot");
+const dots = document.querySelector(".dots");
 
 let positionIndex = 0;
 
@@ -41,15 +41,24 @@ arrowRight.addEventListener("click", function () {
 
 // fonction qui permet de mettre à jour les points
 function changeDots(index) {
-  dots.forEach((dot, i) => {
-    if (i === index) {
+  //suppression des points en trop
+  while (dots.firstChild) {
+    dots.removeChild(dots.firstChild);
+  }
+  for (let i = 0; i < slides.length; i++) {
+    let dot = document.createElement("div");
+    dot.classList.add("dot");
+    dots.append(dot);
+    if (i === positionIndex) {
       dot.classList.add("dot_selected");
-      // permet de colorer le premier point
     } else {
       dot.classList.remove("dot_selected");
-      // enelève la class css pour les autres points
     }
-  });
+    //ajout d'écoute pour chaque point
+    dot.addEventListener("click", function () {
+      changeDots(i); //mise à jour de l'index en fonction du déplacement du point cliqué
+    });
+  }
 }
 
 // fonction changement générale des images vis-àvis des flèches
